@@ -30,7 +30,28 @@ public class MakeChange {
 			}
 		}
 		
-		System.out.println("\nTotal: $" + total);
+		boolean higherDenoms = true;
+		System.out.print("If applicable, would you like to recieve your change in higher denominations than twenty dollar bills?: ");
+		String denominationChoiceInput = kb.next();
+		switch(denominationChoiceInput) {
+		case "yes":
+		case "Yes":
+		case "Y":
+		case "y":
+			higherDenoms = true;
+			break;
+		case "no":
+		case "No":
+		case "n":
+		case "N":
+			higherDenoms = false;
+			break;
+		default:
+			System.out.println("Invalid input. Please try again. Type yes or no: ");
+		}
+		
+		
+		System.out.println("\nTotal Cost: $" + total);
 		System.out.println("Amount Payed: $" + payedAmt);
 		System.out.println("Change Owed: $" + change);
 		
@@ -45,25 +66,35 @@ public class MakeChange {
 		int nickles = 0;
 		int pennies = 0;
 		
-		//hundreds
-		while(true) {
-			if(change >= 100) {
-				change -= 100;
-				hundredBills++;
-			} 
-			else {
-				break;
-			}
-		}
+		System.out.println("\nChange Given: ");
+		System.out.println("-----------------");
 		
-		//fifties
-		while(true) {
-			if(change >= 50) {
-				change -= 50;
-				fiftyBills++;
-			} 
-			else {
-				break;
+		if(higherDenoms) {
+			//hundreds
+			while(true) {
+				if(change >= 100) {
+					change -= 100;
+					hundredBills++;
+				} 
+				else {
+					if(hundredBills > 0)
+						System.out.println(hundredBills + " hundred dollar bill(s). (x100) = $" + (hundredBills*100));
+						//System.out.printf("%f + hundred dollar bill(s). (x100) = $ + hundredBills*100", hundredBills);
+					break;
+				}
+			}
+			
+			//fifties
+			while(true) {
+				if(change >= 50) {
+					change -= 50;
+					fiftyBills++;
+				} 
+				else {
+					if(fiftyBills > 0)
+						System.out.println(fiftyBills + " fifty dollar bill(s). (x50) = $" + (fiftyBills*50));
+					break;
+				}
 			}
 		}
 		
@@ -74,6 +105,8 @@ public class MakeChange {
 				twentyBills++;
 			} 
 			else {
+				if(twentyBills > 0)
+					System.out.println(twentyBills + " twenty dollar bill(s). (x20) = $" + (twentyBills*20));
 				break;
 			}
 		}
@@ -85,6 +118,8 @@ public class MakeChange {
 				tenBills++;
 			} 
 			else {
+				if(tenBills > 0)
+					System.out.println(tenBills + " ten dollar bill(s). (x10) = $" + (tenBills*10));
 				break;
 			}
 		}
@@ -96,6 +131,8 @@ public class MakeChange {
 				fiveBills++;
 			} 
 			else {
+				if(fiveBills > 0)
+					System.out.println(fiveBills + " five dollar bill(s).(x5) = $" + (fiveBills*5));
 				break;
 			}
 		}
@@ -107,6 +144,8 @@ public class MakeChange {
 				oneBills++;
 			} 
 			else {
+				if(oneBills > 0)
+					System.out.println(oneBills + " one dollar bill(s). (x1) = $" + (oneBills*1));
 				break;
 			}
 		}
@@ -118,6 +157,8 @@ public class MakeChange {
 				quarters++;
 			} 
 			else {
+				if(quarters > 0)
+					System.out.println(quarters + " quarters. (x0.25) = $" + (quarters*0.25));
 				break;
 			}
 		}
@@ -129,6 +170,8 @@ public class MakeChange {
 				dimes++;
 			} 
 			else {
+				if(dimes > 0)
+					System.out.println(dimes + " dimes. (x0.10) = $" + (dimes*0.10));
 				break;
 			}
 		}
@@ -140,6 +183,8 @@ public class MakeChange {
 				nickles++;
 			} 
 			else {
+				if(nickles > 0)
+					System.out.println(nickles + " nickles. (x0.05) = $" + (nickles*0.05));
 				break;
 			}
 		}
@@ -151,23 +196,10 @@ public class MakeChange {
 				pennies++;
 			} 
 			else {
+				if(pennies > 0)
+				System.out.println(pennies + " pennies. (x0.01) = $" + (pennies*0.01));
 				break;
 			}
 		}
-		
-		//System.out.println("hundredBills: " + hundredBills);
-		System.out.println("\nChange Given: ");
-		System.out.println("-----------------");
-		System.out.println("hundred bills: " + hundredBills + " (x100) = " + (hundredBills*100) + " dollars");
-		System.out.println("fifty bills: " + fiftyBills + " (x50) = " + (fiftyBills*50) + " dollars");
-		System.out.println("twenty bills: " + twentyBills + " (x20) = " + (twentyBills*20) + " dollars");
-		System.out.println("ten bills: " + tenBills + " (x10) = " + (tenBills*10) + " dollars");
-		System.out.println("five bills: " + fiveBills + " (x5) = " + (fiveBills*5) + " dollars");
-		System.out.println("one bills: " + oneBills + " (x1) = " + (oneBills*1) + " dollars");
-		System.out.println("quarters: " + quarters + " (x0.25) = " + (quarters*0.25) + " dollars");
-		System.out.println("dimes: " + dimes + " (x0.10) = " + (dimes*0.10) + " dollars");
-		System.out.println("nickles: " + nickles + " (x0.05) = " + (nickles*0.05) + " dollars");
-		System.out.println("pennies: " + pennies + " (x0.01) = " + (pennies*0.01) + " dollars");
-	
 	}
 }
