@@ -213,6 +213,10 @@ public class MakeChange {
 		
 		//pennies
 		while(true) {
+			if(change < 0.01 && change * 1000 > 0.5)
+			{
+				pennies++;	//to take care of rounding errors under 1 cent...
+			}
 			if(change >= 0.01) {
 				change -= 0.01;
 				pennies++;
@@ -220,6 +224,7 @@ public class MakeChange {
 			else {
 				if(pennies > 0)
 				System.out.println(pennies + " penny(s). (x0.01) = $" + (pennies*0.01));
+				//System.out.println(change);
 				break;
 			}
 		}
