@@ -1,11 +1,11 @@
 # MakeChangeProject
 
 ### Overview
-This program will ask the user how much an item costs, ask how they will pay, and return the change owed in the appropriate denominations.
+This program asks the user how much an item costs, asks how much they will pay, and returns the change owed in the appropriate denominations.
 
--This program asks the user for more money if the amount to pay entered is lower than the amount due
+--Will ask user for more money if the amount entered is lower than the amount due.
 
--This program asks the user if they would prefer to receive their change in denominations greater than twenty dollar bills if the change owed exceeds 100 dollars.
+--Offers option to give change in higher denominations than twenty.
 
 ### Technologies Used
 -Java
@@ -17,4 +17,4 @@ This program will ask the user how much an item costs, ask how they will pay, an
 -Run program in IDE or compile and run in terminal
 
 ### Lessons Learned
-While writing this program, I learned some strategies to deal with issues that arose from rounding errors involving floating point numbers in Java.
+While writing this program, I learned some strategies to deal with issues that arose from rounding errors involving floating point numbers in Java. Looking back, I should have done all of the calculations using pennies before converting into dollars, in order to deal with rounding errors. However, the rounding errors were so small that they didn't appear until the end of the code where the pennies were calculated. Rather than rewrite my code, I bandaged the problem by applying an if statement to check whether or not there was a significant digit in the thousandths that would influence a rounding error.
