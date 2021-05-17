@@ -13,47 +13,64 @@ public class MakeChange {
 		//Prompt 1:
 		System.out.print("Enter the price of your purchase: ");
 		double total = kb.nextDouble();
+		total *= 100;	//convert to pennies
 		
 		//Prompt 2:
 		System.out.print("Enter amount to pay: ");
 		double payedAmt =  kb.nextDouble();
+		payedAmt *= 100;	//convert to pennies
 		
 		//Calculate change/amount owed
 		while(true) {	
 			change = payedAmt - total;
 			if(change < 0){
-				System.out.println("You still owe " + (change * -1) + "dollars");
+				change = change * -1 *0.01;
+				//System.out.println("You still owe $" + (change * -1 * 0.01));
+				System.out.printf("You still owe $%.2f%n", change);
 				System.out.print("Enter additional amount to pay: ");
-				payedAmt += kb.nextDouble();
+				payedAmt += kb.nextDouble() * 100;
 			}else {
 				break;
 			}
 		}
 		
+		//convert dollar amount from pennies back to dollars
+		total *= 0.01;
+		payedAmt *= 0.01;
+		change *= 0.01;
+		
+		//Prompt for higher denominations if change is more than 100 dollars
 		boolean higherDenoms = true;
-		System.out.print("If applicable, would you like to recieve your change in higher denominations than twenty dollar bills?: ");
-		String denominationChoiceInput = kb.next();
-		switch(denominationChoiceInput) {
-		case "yes":
-		case "Yes":
-		case "Y":
-		case "y":
-			higherDenoms = true;
-			break;
-		case "no":
-		case "No":
-		case "n":
-		case "N":
-			higherDenoms = false;
-			break;
-		default:
-			System.out.println("Invalid input. Please try again. Type yes or no: ");
+		if(change >= 100)
+			{
+				System.out.print("If applicable, would you like to recieve your change in higher denominations than twenty dollar bills?: ");
+				String denominationChoiceInput = kb.next();
+				switch(denominationChoiceInput) {
+				case "yes":
+				case "Yes":
+				case "Y":
+				case "y":
+					higherDenoms = true;
+					break;
+				case "no":
+				case "No":
+				case "n":
+				case "N":
+					higherDenoms = false;
+					break;
+				default:
+					System.out.println("Invalid input. Please try again. Type yes or no: ");
+			}
 		}
 		
 		
-		System.out.println("\nTotal Cost: $" + total);
-		System.out.println("Amount Payed: $" + payedAmt);
-		System.out.println("Change Owed: $" + change);
+		System.out.printf("%nTotal Cost: $%.2f", total);
+		System.out.printf("%nAmount Payed Cost: $%.2f", payedAmt);
+		System.out.printf("%nChange Owed: $%.2f%n", change);
+		
+		//System.out.println("\nTotal Cost: $" + total);
+		//System.out.println("Amount Payed: $" + payedAmt);
+		//System.out.println("Change Owed: $" + change);
 		
 		int hundredBills = 0;
 		int fiftyBills = 0;
@@ -67,7 +84,7 @@ public class MakeChange {
 		int pennies = 0;
 		
 		System.out.println("\nChange Given: ");
-		System.out.println("-----------------");
+		System.out.println("-------------");
 		
 		if(higherDenoms) {
 			//hundreds
@@ -158,7 +175,9 @@ public class MakeChange {
 			} 
 			else {
 				if(quarters > 0)
-					System.out.println(quarters + " quarters. (x0.25) = $" + (quarters*0.25));
+					//System.out.println(quarters + " quarter(s). (x0.25) = $" + (quarters*0.25));
+					System.out.printf("%d quarter(s). (x.25) = $%.2f%n", quarters, (quarters * 0.25));
+
 				break;
 			}
 		}
@@ -170,8 +189,11 @@ public class MakeChange {
 				dimes++;
 			} 
 			else {
-				if(dimes > 0)
-					System.out.println(dimes + " dimes. (x0.10) = $" + (dimes*0.10));
+				if(dimes > 0) {
+					//dimes *= 0.10;
+					//System.out.println(dimes + " dime(s). (x0.10) = $" + (dimes*0.10));
+					System.out.printf("%d dime(s). (x.10) = $%.2f%n", dimes, (dimes * 0.10));
+				}
 				break;
 			}
 		}
@@ -184,7 +206,7 @@ public class MakeChange {
 			} 
 			else {
 				if(nickles > 0)
-					System.out.println(nickles + " nickles. (x0.05) = $" + (nickles*0.05));
+					System.out.println(nickles + " nickle(s). (x0.05) = $" + (nickles*0.05));
 				break;
 			}
 		}
@@ -197,9 +219,11 @@ public class MakeChange {
 			} 
 			else {
 				if(pennies > 0)
-				System.out.println(pennies + " pennies. (x0.01) = $" + (pennies*0.01));
+				System.out.println(pennies + " penny(s). (x0.01) = $" + (pennies*0.01));
 				break;
 			}
 		}
+		
+		System.out.printf("%n%nCalculated change: $%.2f", ((hundredBills * 100) + (fiftyBills * 50) + (twentyBills * 20) + (tenBills * 10) + (fiveBills * 5) + (oneBills * 1) + (quarters * 0.25) + (dimes * 0.10) + (nickles * 0.05) + (pennies * 0.01)));
 	}
 }
