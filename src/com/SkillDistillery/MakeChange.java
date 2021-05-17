@@ -43,7 +43,7 @@ public class MakeChange {
 		boolean higherDenoms = true;
 		if(change >= 100)
 			{
-				System.out.print("If applicable, would you like to recieve your change in higher denominations than twenty dollar bills?: ");
+				System.out.print("Would you like to recieve your change in higher denominations than twenty dollar bills?: ");
 				String denominationChoiceInput = kb.next();
 				switch(denominationChoiceInput) {
 				case "yes":
